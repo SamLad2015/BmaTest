@@ -1,0 +1,10 @@
+﻿{
+  "name": "bmatestapi",
+  "version": "0.0.0",
+  "scripts": {
+    "install": "cd ui & npm install",
+    "start": "cd ui & npm start",
+    "build": "cd ui & npm run-script build",
+    "build-prd": "cd ui & npm run-script build-prd"
+  }
+}

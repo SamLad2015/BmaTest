@@ -1,0 +1,6 @@
+C:\Users\ladsa\RiderProjects\bma\obj\Debug\netcoreapp3.1\BlaTestApi.csprojAssemblyReference.cache
+C:\Users\ladsa\RiderProjects\bma\obj\Debug\netcoreapp3.1\BlaTestApi.AssemblyInfoInputs.cache
+C:\Users\ladsa\RiderProjects\bma\obj\Debug\netcoreapp3.1\BlaTestApi.AssemblyInfo.cs
+C:\Users\ladsa\RiderProjects\bma\obj\Debug\netcoreapp3.1\BlaTestApi.csproj.CoreCompileInputs.cache
+C:\Users\ladsa\RiderProjects\bma\obj\Debug\netcoreapp3.1\BlaTestApi.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\ladsa\RiderProjects\bma\obj\Debug\netcoreapp3.1\BlaTestApi.MvcApplicationPartsAssemblyInfo.cache
