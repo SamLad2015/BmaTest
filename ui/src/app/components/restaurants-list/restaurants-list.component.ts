@@ -13,10 +13,20 @@ import {LoadRestaurants} from "../../../store/actions";
 export class RestaurantsListComponent implements OnInit {
   data: any[];
   settings = {
-    actions: {
-      add: true,
-      edit: true,
-      position: 'right'
+    hideSubHeader: true,
+    add: {
+      addButtonContent: '<i class="nb-plus"></i>',
+      createButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+    },
+    edit: {
+      editButtonContent: '<span>Edit</span>',
+      saveButtonContent: '<i class="nb-checkmark"></i>',
+      cancelButtonContent: '<i class="nb-close"></i>',
+    },
+    delete: {
+      deleteButtonContent: '<i class="nb-trash"></i>',
+      confirmDelete: true,
     },
     columns: ConfigStaticService.tableConfig()
   };
