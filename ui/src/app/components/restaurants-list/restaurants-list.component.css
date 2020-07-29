@@ -16,3 +16,16 @@
 :host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
   color: #5dcfe3;
 }
+
+:host /deep/ .fa {
+  font-size: 1.5em;
+}
+
+:host /deep/ .fa-edit {
+  margin-top: 2px;
+  margin-right: 10px;
+}
+
+:host /deep/ .fa-plus {
+  font-size: 1em;
+}

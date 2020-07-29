@@ -20,12 +20,14 @@ import {Ng2SmartTableModule} from "ng2-smart-table";
 import {CheckboxComponent} from "./components/check-box.component";
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { IAppState, rootReducer, INITIAL_STATE } from '../store/store';
+import { RestaurantComponent } from './components/restaurants-list/restaurant/restaurant.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RestaurantsListComponent,
-    CheckboxComponent
+    CheckboxComponent,
+    RestaurantComponent
   ],
   imports: [
     BrowserModule,

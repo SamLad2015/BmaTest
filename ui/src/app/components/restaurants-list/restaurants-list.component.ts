@@ -14,19 +14,14 @@ export class RestaurantsListComponent implements OnInit {
   data: any[];
   settings = {
     hideSubHeader: true,
-    add: {
-      addButtonContent: '<i class="nb-plus"></i>',
-      createButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
-    },
     edit: {
-      editButtonContent: '<span>Edit</span>',
-      saveButtonContent: '<i class="nb-checkmark"></i>',
-      cancelButtonContent: '<i class="nb-close"></i>',
+      editButtonContent: '<span><i class="fa fa-edit" title="Edit"></i></span>'
     },
     delete: {
-      deleteButtonContent: '<i class="nb-trash"></i>',
-      confirmDelete: true,
+      deleteButtonContent: '<span class="delete"><i class="fa fa-trash" title="Delete"></i></span>'
+    },
+    actions: {
+      position: 'right'
     },
     columns: ConfigStaticService.tableConfig()
   };
