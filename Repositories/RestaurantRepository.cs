@@ -22,10 +22,20 @@ namespace BmaTestApi.Repositories
         {
             return _TestDbContext.RestaurantEntities.FirstOrDefault(x => x.Id == id);
         }
+        
+        public IList<RestaurantCuisineEntity> GetRestaurantTags(int id)
+        {
+            return _TestDbContext.RestaurantCuisineEntities.Where(t => t.RestaurantId == id).ToList();
+        }
 
         public void Add(RestaurantEntity item)
         {
             _TestDbContext.RestaurantEntities.Add(item);
+        }
+
+        public void AddCuisineTag(RestaurantCuisineEntity tag)
+        {
+            _TestDbContext.RestaurantCuisineEntities.Add(tag);
         }
 
         public void Update(RestaurantEntity item)
@@ -38,15 +48,20 @@ namespace BmaTestApi.Repositories
             _TestDbContext.RestaurantEntities.Remove(item);
         }
 
+        public void RemoveCuisineTag(RestaurantCuisineEntity tag)
+        {
+            _TestDbContext.RestaurantCuisineEntities.Remove(tag);
+        }
+
         public IQueryable<RestaurantEntity> GetAll(QueryParameters queryParameters)
         {
-            IQueryable<RestaurantEntity> _allItems = 
+            IQueryable<RestaurantEntity> allItems = 
                 _TestDbContext.RestaurantEntities
                     .Include(r => r.Cuisine)
                     .ThenInclude(cuisine => cuisine.CuisineEntity)
                     .OrderBy(queryParameters.OrderBy);
 
-            return _allItems
+            return allItems
                 .Skip(queryParameters.PageCount * (queryParameters.Page - 1))
                 .Take(queryParameters.PageCount);
         }

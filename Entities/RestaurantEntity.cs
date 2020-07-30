@@ -9,6 +9,6 @@ namespace BmaTestApi.Entities
         public IList<RestaurantCuisineEntity> Cuisine { get; set; }
         public bool FamilyFriendly { get; set; }
         public bool VeganOptions { get; set; }
-        public float Rating { get; set; }
+        public double Rating { get; set; }
     }
 }

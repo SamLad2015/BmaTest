@@ -19,6 +19,7 @@ using Newtonsoft.Json.Serialization;
 using BmaTestApi.Helpers;
 using BmaTestApi.MappingProfiles;
 using BmaTestApi.Repositories;
+using BmaTestApi.Services;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace BmaTestApi
@@ -42,6 +43,8 @@ namespace BmaTestApi
             
             services.AddScoped<IRestaurantRepository, RestaurantRepository>();
             services.AddScoped<ICuisineRepository, CuisineRepository>();
+            services.AddScoped<ICuisineService, CuisineService>();
+            services.AddScoped<IRestaurantService, RestaurantService>();
             services.AddRouting(options => options.LowercaseUrls = true);
             services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
             services.AddScoped<IUrlHelper>(x =>

@@ -1,0 +1,44 @@
+<div class="restaurant-details">
+  <h4>Restaurant: {{restaurant.name || 'New'}}</h4>
+  <div class="content-row">
+    <div [formGroup]="form">
+      <div class="control-column">
+        <label for="name">Name:</label>
+        <input id="name" type="text" formControlName="name">
+      </div>
+      <div class="control-column">
+        <label for="rating"> Rating:</label>
+        <input id="rating" type="number" step="0.5" min="0" max="5" formControlName="rating">
+      </div>
+      <div class="control-column-double">
+        <label for="address">Address:</label>
+        <input id="address" type="text" formControlName="address">
+      </div>
+      <div class="control-column-double">
+        <label for="familyFriendly">Family Friendly: </label>
+        <input id="familyFriendly" type="checkbox" formControlName="familyFriendly">
+      </div>
+      <div class="control-column-double">
+        <label for="veganOptions">Vegan Options:</label>
+        <input id="veganOptions" type="checkbox" formControlName="veganOptions">
+      </div>
+      <div class="control-column-double">
+        <label for="cuisine-container">Cuisine:</label>
+        <div id="cuisine-container" class="cuisine-container">
+          <span class="cuisine" [class.selected]="isTagSelected(c)"
+                *ngFor="let c of cuisines" (click)="addRemoveCuisineTag(c)">{{c.name}}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content-row-multi">
+    <Button class="btn-primary" (click)="saveChanges()">
+      <i class="fa fa-check"></i>
+      <span> Save</span>
+    </Button>
+    <Button class="btn-danger" (click)="cancelChanges()">
+      <i class="fa fa-remove"></i>
+      <span> Cancel</span>
+    </Button>
+  </div>
+</div>

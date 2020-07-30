@@ -35,25 +35,22 @@ export class RestaurantService {
   CreateRestaurant(data): Observable<Restaurant> {
     return this.http.post<Restaurant>(this.baseurl , JSON.stringify(data), this.httpOptions)
       .pipe(
-        retry(1),
         catchError(this.errorHandler)
       )
   }
 
   // PUT
-  UpdateRestaurant(id, data): Observable<Restaurant> {
-    return this.http.put<Restaurant>(this.baseurl + '/' + id, JSON.stringify(data), this.httpOptions)
+  UpdateRestaurant(data): Observable<Restaurant> {
+    return this.http.put<Restaurant>(this.baseurl + '/' + data.id, JSON.stringify(data), this.httpOptions)
       .pipe(
-        retry(1),
         catchError(this.errorHandler)
       )
   }
 
   // DELETE
-  DeleteRestaurant(id, data): Observable<Restaurant> {
+  DeleteRestaurant(id): Observable<Restaurant> {
     return this.http.delete<Restaurant>(this.baseurl + '/' + id, this.httpOptions)
       .pipe(
-        retry(1),
         catchError(this.errorHandler)
       )
   }

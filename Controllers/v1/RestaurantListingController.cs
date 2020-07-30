@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using BmaTestApi.Entities;
 using BmaTestApi.Models;
 using BmaTestApi.Helpers;
+using BmaTestApi.Services;
 
 namespace BmaTestApi.v1.Controllers
 {
@@ -18,58 +19,41 @@ namespace BmaTestApi.v1.Controllers
     //[Route("api/[controller]")]
     public class RestaurantListingController : ControllerBase
     {
-        private readonly IRestaurantRepository _testRepository;
-        private readonly IMapper _mapper;
+        private readonly IRestaurantService _restaurantService;
 
         public RestaurantListingController(
-            IRestaurantRepository testRepository,
-            IMapper mapper)
+            IRestaurantService restaurantService)
         {
-            _testRepository = testRepository;
-            _mapper = mapper;
+            _restaurantService = restaurantService;
         }
 
         [HttpGet(Name = nameof(GetAllItems))]
         public ActionResult GetAllItems(ApiVersion version, [FromQuery] QueryParameters queryParameters)
         {
-            IList<RestaurantEntity> testEntities = _testRepository.GetAll(queryParameters).ToList();
+            var restaurants = _restaurantService.GetAll(queryParameters);
             
-            return Ok(_mapper.Map<IList<RestaurantDto>>(testEntities));
-        }
-
-        [HttpGet]
-        [Route("{id:int}", Name = nameof(GetSingleItem))]
-        public ActionResult GetSingleItem(ApiVersion version, int id)
-        {
-            RestaurantEntity item = _testRepository.GetSingle(id);
-
-            if (item == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(item);
+            return Ok(restaurants);
         }
 
         [HttpPost(Name = nameof(AddItem))]
         public ActionResult<RestaurantDto> AddItem(ApiVersion version, [FromBody] RestaurantRequestDto createDto)
         {
-            if (createDto == null)
+            try
             {
-                return BadRequest();
+                if (createDto == null)
+                {
+                    return BadRequest();
+                }
+                
+                _restaurantService.AddRestaurant(createDto);
+
+                return Ok();
             }
-            
-            RestaurantEntity toAdd = _mapper.Map<RestaurantEntity>(createDto);
-
-            _testRepository.Add(toAdd);
-
-            if (!_testRepository.Save())
+            catch (Exception e)
             {
-                throw new Exception("Creating a item failed on save.");
+                Console.WriteLine(e);
+                throw;
             }
-
-            RestaurantEntity item = _testRepository.GetSingle(toAdd.Id);
-            return Ok(_mapper.Map<IList<RestaurantDto>>(item));
         }
         
 
@@ -81,39 +65,19 @@ namespace BmaTestApi.v1.Controllers
             {
                 return BadRequest();
             }
+            
+            _restaurantService.UpdateRestaurant(id ,updateDto);
 
-            var existingItem = _testRepository.GetSingle(id);
-
-            if (existingItem == null)
-            {
-                return NotFound();
-            }
-            _mapper.Map(updateDto, existingItem);
-
-            _testRepository.Update(existingItem);
-
-            if (!_testRepository.Save())
-            {
-                throw new Exception("Updating a item failed on save.");
-            }
-
-            return Ok(_mapper.Map<RestaurantRequestDto>(existingItem));
+            return Ok();
         }
         
         [HttpDelete]
         [Route("{id:int}", Name = nameof(DeleteItem))]
-        public ActionResult<RestaurantRequestDto> DeleteItem(int id, [FromBody]int deleteDtoId)
+        public ActionResult<RestaurantRequestDto> DeleteItem(int id)
         {
-            var existingItem = _testRepository.GetSingle(deleteDtoId);
+            _restaurantService.DeleteRestaurant(id);
 
-            _testRepository.Delete(existingItem);
-
-            if (!_testRepository.Save())
-            {
-                throw new Exception("Deleting a item failed on save.");
-            }
-
-            return Ok(_mapper.Map<RestaurantRequestDto>(existingItem));
+            return Ok();
         }
     }
 }

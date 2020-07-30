@@ -62,4 +62,3 @@ C:\Users\ladsa\RiderProjects\bma\obj\Debug\netcoreapp3.1\staticwebassets\BmaTest
 C:\Users\ladsa\RiderProjects\bma\obj\Debug\netcoreapp3.1\BmaTestApi.dll
 C:\Users\ladsa\RiderProjects\bma\obj\Debug\netcoreapp3.1\BmaTestApi.pdb
 C:\Users\ladsa\RiderProjects\bma\obj\Debug\netcoreapp3.1\BmaTestApi.genruntimeconfig.cache
-C:\Users\ladsa\RiderProjects\bma\bin\Debug\netcoreapp3.1\package.json

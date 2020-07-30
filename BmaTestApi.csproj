@@ -28,25 +28,24 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Update="package.json">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
     <Folder Include="ui\dist" />
   </ItemGroup>
 
   <ItemGroup>
     <TypeScriptCompile Include="ui\src\app\components\check-box.component.ts" />
     <TypeScriptCompile Include="ui\src\app\shared\config.static.service.ts" />
+    <TypeScriptCompile Include="ui\src\app\shared\cuisine.service.ts" />
+    <TypeScriptCompile Include="ui\src\app\shared\formBuilder.static.service.ts" />
     <TypeScriptCompile Include="ui\src\app\shared\restaurant.service.ts" />
     <TypeScriptCompile Include="ui\src\app\shared\restaurant.ts" />
     <TypeScriptCompile Include="ui\src\store\actions.ts" />
     <TypeScriptCompile Include="ui\src\store\constants.ts" />
     <TypeScriptCompile Include="ui\src\store\store.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="package.json" />
+    <Content Remove="package-lock.json" />
   </ItemGroup>
 
 </Project>

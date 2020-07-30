@@ -21,6 +21,7 @@ import {CheckboxComponent} from "./components/check-box.component";
 import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { IAppState, rootReducer, INITIAL_STATE } from '../store/store';
 import { RestaurantComponent } from './components/restaurants-list/restaurant/restaurant.component';
+import {FormBuilderStaticService} from "./shared/formBuilder.static.service";
 
 @NgModule({
   declarations: [
@@ -37,7 +38,7 @@ import { RestaurantComponent } from './components/restaurants-list/restaurant/re
     Ng2SmartTableModule,
     NgReduxModule
   ],
-  providers: [RestaurantService],
+  providers: [RestaurantService, FormBuilderStaticService],
   bootstrap: [AppComponent]
 })
 

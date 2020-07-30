@@ -15,6 +15,7 @@ namespace BmaTestApi.MappingProfiles
                         opt.MapFrom(src => 
                             src.Cuisine.Select(c => c.CuisineEntity.Name).ToList()))
                 .ReverseMap();
+            CreateMap<RestaurantRequestDto, RestaurantEntity>();
         }
     }
 }

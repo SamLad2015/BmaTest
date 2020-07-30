@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using BmaTestApi.Entities;
 using BmaTestApi.Models;
 using BmaTestApi.Helpers;
+using BmaTestApi.Services;
 
 namespace BmaTestApi.v1.Controllers
 {
@@ -18,20 +19,20 @@ namespace BmaTestApi.v1.Controllers
     //[Route("api/[controller]")]
     public class CuisineController : ControllerBase
     {
-        private readonly ICuisineRepository _testRepository;
+        private readonly ICuisineService _cuisineService;
 
         public CuisineController(
-            ICuisineRepository testRepository)
+            ICuisineService cuisineService)
         {
-            _testRepository = testRepository;
+            _cuisineService = cuisineService;
         }
 
         [HttpGet(Name = nameof(GetAll))]
         public ActionResult GetAll(ApiVersion version)
         {
-            List<CuisineEntity> testEntities = _testRepository.GetAll().ToList();
+            var cuisineTags = _cuisineService.GetAllCuisineTags();
             
-            return Ok(testEntities);
+            return Ok(cuisineTags);
         }
     }
 }

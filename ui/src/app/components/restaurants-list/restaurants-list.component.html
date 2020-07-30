@@ -1,12 +1,17 @@
-<div class="content-row">
-  <h3>Restaurants</h3>
-  <div class="table">
-    <ng2-smart-table [settings]="settings" [source]="data"></ng2-smart-table>
+<div class="restaurants">
+  <div class="content-row">
+    <h3>Restaurants</h3>
+    <div class="table">
+      <ng2-smart-table #table [settings]="settings" [source]="data"></ng2-smart-table>
+    </div>
   </div>
-</div>
-<div class="content-row">
-  <Button class="btn-primary">
-    <i class="fa fa-plus"></i>
-    <span> Add New</span>
-  </Button>
+  <div class="content-row">
+    <Button class="btn-primary add-button" (click)="addNewRestaurant()">
+      <i class="fa fa-plus"></i>
+      <span> Add New</span>
+    </Button>
+  </div>
+  <div class="content-row">
+    <restaurant *ngIf="selectedRestaurant" [restaurant]="selectedRestaurant" (cancelForm)="onFormCancel()"></restaurant>
+  </div>
 </div>

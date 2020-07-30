@@ -138,6 +138,33 @@ namespace BmaTestApi.Repositories
                         FamilyFriendly = false,
                         VeganOptions = true,
                         Rating = 4
+                    },
+                    new RestaurantEntity
+                    {
+                        Id =  4,
+                        Name = "Gaucho",
+                        Address =  "21-22 Park Row, Leeds LS1 5JF England",
+                        FamilyFriendly =  false,
+                        VeganOptions = false,
+                        Rating = 3
+                    },
+                    new RestaurantEntity
+                    {
+                        Id =  5,
+                        Name = "Viva Cuba",
+                        Address = "342 Kirkstall Road, Leeds, LS4 2DS",
+                        FamilyFriendly = true,
+                        VeganOptions = true,
+                        Rating =  4.5
+                    },
+                    new RestaurantEntity
+                    {
+                        Id = 6,
+                        Name = "The Brunswick",
+                        Address =  "82 North Street, Leeds LS2 7PN England",
+                        FamilyFriendly = true,
+                        VeganOptions = true,
+                        Rating =  4
                     }
                 );
             modelBuilder.Entity<RestaurantCuisineEntity>().HasData(
@@ -176,6 +203,42 @@ namespace BmaTestApi.Repositories
             new RestaurantCuisineEntity
             {
                 RestaurantId = 3, CuisineId = 1
+            },
+            new RestaurantCuisineEntity
+            {
+                RestaurantId = 4, CuisineId = 8
+            },
+            new RestaurantCuisineEntity
+            {
+                RestaurantId = 4, CuisineId = 9
+            },
+            new RestaurantCuisineEntity
+            {
+                RestaurantId = 4, CuisineId = 10
+            },
+            new RestaurantCuisineEntity
+            {
+                RestaurantId = 5, CuisineId = 11
+            },
+            new RestaurantCuisineEntity
+            {
+                RestaurantId = 5, CuisineId = 12
+            },
+            new RestaurantCuisineEntity
+            {
+                RestaurantId = 5, CuisineId = 13
+            },
+            new RestaurantCuisineEntity
+            {
+                RestaurantId = 6, CuisineId = 5
+            },
+            new RestaurantCuisineEntity
+            {
+                RestaurantId = 6, CuisineId = 8
+            },
+            new RestaurantCuisineEntity
+            {
+                RestaurantId = 6, CuisineId = 14
             });
         }
 
