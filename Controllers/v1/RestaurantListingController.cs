@@ -28,7 +28,7 @@ namespace BmaTestApi.v1.Controllers
         }
 
         [HttpGet(Name = nameof(GetAllItems))]
-        public ActionResult GetAllItems(ApiVersion version, [FromQuery] QueryParameters queryParameters)
+        public ActionResult GetAllItems(ApiVersion version, [FromQuery] RestaurantFilterDto queryParameters)
         {
             var restaurants = _restaurantService.GetAll(queryParameters);
             

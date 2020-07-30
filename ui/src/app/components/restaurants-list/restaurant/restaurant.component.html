@@ -25,7 +25,7 @@
       <div class="control-column-double">
         <label for="cuisine-container">Cuisine:</label>
         <div id="cuisine-container" class="cuisine-container">
-          <span class="cuisine" [class.selected]="isTagSelected(c)"
+          <span class="cuisine-tag" [class.selected]="isTagSelected(c)"
                 *ngFor="let c of cuisines" (click)="addRemoveCuisineTag(c)">{{c.name}}</span>
         </div>
       </div>

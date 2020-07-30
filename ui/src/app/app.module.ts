@@ -11,7 +11,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RestaurantService } from './shared/restaurant.service';
 
 /* Forms module */
-import { ReactiveFormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 /* Components */
@@ -22,13 +22,16 @@ import { NgRedux, NgReduxModule } from '@angular-redux/store';
 import { IAppState, rootReducer, INITIAL_STATE } from '../store/store';
 import { RestaurantComponent } from './components/restaurants-list/restaurant/restaurant.component';
 import {FormBuilderStaticService} from "./shared/formBuilder.static.service";
+import { FiltersComponent } from './components/restaurants-list/filters/filters.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
     AppComponent,
     RestaurantsListComponent,
     CheckboxComponent,
-    RestaurantComponent
+    RestaurantComponent,
+    FiltersComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +39,9 @@ import {FormBuilderStaticService} from "./shared/formBuilder.static.service";
     HttpClientModule,
     ReactiveFormsModule,
     Ng2SmartTableModule,
-    NgReduxModule
+    NgReduxModule,
+    FormsModule,
+    BrowserAnimationsModule
   ],
   providers: [RestaurantService, FormBuilderStaticService],
   bootstrap: [AppComponent]

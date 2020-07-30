@@ -25,7 +25,7 @@ export class RestaurantComponent implements OnChanges {
               private restaurantService: RestaurantService,
               private ngRedux: NgRedux<IAppState>) {
    this.fbsService = fbsService;
-   cuisineService.GetAllCuisines().subscribe(cuisines => this.cuisines = cuisines);
+   cuisineService.GetAllCuisines().subscribe(cuisines => this.cuisines = cuisines.result);
   }
 
   ngOnChanges(): void {

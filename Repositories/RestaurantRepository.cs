@@ -1,10 +1,9 @@
-﻿using BmaTestApi.Entities;
-using BmaTestApi.Helpers;
-using BmaTestApi.Models;
-using System;
+﻿using System;
+using BmaTestApi.Entities;
 using System.Collections.Generic;
 using System.Linq;
-using System.Linq.Dynamic.Core;
+using System.Threading.Tasks;
+using BmaTestApi.Dtos;
 using Microsoft.EntityFrameworkCore;
 
 namespace BmaTestApi.Repositories
@@ -18,14 +17,15 @@ namespace BmaTestApi.Repositories
             _TestDbContext = TestDbContext;
         }
 
-        public RestaurantEntity GetSingle(int id)
+        public async Task<RestaurantEntity> GetSingle(int id)
         {
-            return _TestDbContext.RestaurantEntities.FirstOrDefault(x => x.Id == id);
+            return await _TestDbContext.RestaurantEntities.FirstOrDefaultAsync(x => x.Id == id);
         }
         
-        public IList<RestaurantCuisineEntity> GetRestaurantTags(int id)
+        public async Task<IList<RestaurantCuisineEntity>> GetRestaurantTags(int id)
         {
-            return _TestDbContext.RestaurantCuisineEntities.Where(t => t.RestaurantId == id).ToList();
+            return await _TestDbContext.RestaurantCuisineEntities.Where(t => t.RestaurantId == id)
+                .ToListAsync();
         }
 
         public void Add(RestaurantEntity item)
@@ -53,22 +53,49 @@ namespace BmaTestApi.Repositories
             _TestDbContext.RestaurantCuisineEntities.Remove(tag);
         }
 
-        public IQueryable<RestaurantEntity> GetAll(QueryParameters queryParameters)
+        public async Task<IList<RestaurantEntity>> GetAll(RestaurantFilterDto queryParameters)
         {
-            IQueryable<RestaurantEntity> allItems = 
+            var allItems =
                 _TestDbContext.RestaurantEntities
                     .Include(r => r.Cuisine)
                     .ThenInclude(cuisine => cuisine.CuisineEntity)
-                    .OrderBy(queryParameters.OrderBy);
+                    .Where(r => queryParameters.FamilyFriendly.HasValue
+                        ? r.FamilyFriendly == queryParameters.FamilyFriendly.Value
+                        : !queryParameters.FamilyFriendly.HasValue
+                    )
+                    .Where(r => queryParameters.VeganOptions.HasValue
+                        ? r.VeganOptions == queryParameters.VeganOptions.Value
+                        : !queryParameters.VeganOptions.HasValue
+                    )
+                    .Where(r => !string.IsNullOrWhiteSpace(queryParameters.Name)
+                        ? r.Name.ToLower().Contains(queryParameters.Name.ToLower())
+                        : string.IsNullOrWhiteSpace(queryParameters.Name)
+                    );
 
-            return allItems
-                .Skip(queryParameters.PageCount * (queryParameters.Page - 1))
-                .Take(queryParameters.PageCount);
+            if (!string.IsNullOrWhiteSpace(queryParameters.CuisineTagIds))
+            {
+                var ids = StringToIntList(queryParameters.CuisineTagIds).ToList();
+                allItems = allItems.Where(r => r.Cuisine.Any(c =>
+                    ids.IndexOf(c.CuisineId) > -1));
+            }
+
+            return await allItems.ToListAsync();;
         }
 
         public bool Save()
         {
             return (_TestDbContext.SaveChanges() >= 0);
+        }
+        
+        private static IEnumerable<int> StringToIntList(string str) {
+            if (String.IsNullOrEmpty(str))
+                yield break;
+
+            foreach(var s in str.Split(',')) {
+                int num;
+                if (int.TryParse(s, out num))
+                    yield return num;
+            }
         }
     }
 }

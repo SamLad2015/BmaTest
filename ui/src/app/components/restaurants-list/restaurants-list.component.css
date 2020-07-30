@@ -28,3 +28,17 @@
 :host /deep/ .add-button {
   float: right;
 }
+:host /deep/ ng2-smart-table-pager nav.ng2-smart-pagination-nav {
+  width: 100%;
+  align-items: center;
+  text-align: center;
+  margin-top: 10px;
+}
+
+:host /deep/ ng2-smart-table-pager nav.ng2-smart-pagination-nav ul li a {
+  height: 35px;
+}
+.filter-button {
+  float: right;
+  margin-bottom: 10px;
+}

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using AutoMapper;
 using BmaTestApi.Dtos;
 using BmaTestApi.Entities;
@@ -20,11 +21,9 @@ namespace BmaTestApi.Services
             _restaurantRepository = testRepository;
         }
 
-        public IList<RestaurantDto> GetAll(QueryParameters queryParameters)
+        public async Task<IList<RestaurantDto>> GetAll(RestaurantFilterDto queryParameters)
         {
-            IList<RestaurantEntity> testEntities = _restaurantRepository.GetAll(queryParameters).ToList();
-            
-            return _mapper.Map<IList<RestaurantDto>>(testEntities);
+            return _mapper.Map<IList<RestaurantDto>>((await _restaurantRepository.GetAll(queryParameters)));
         }
 
         public void AddRestaurant(RestaurantRequestDto requestDto)
@@ -59,11 +58,11 @@ namespace BmaTestApi.Services
         {
             var existingItem = _restaurantRepository.GetSingle(restaurantId);
             
-            _mapper.Map(requestDto, existingItem);
+            _mapper.Map(requestDto, existingItem.Result);
 
             var existingTags = _restaurantRepository.GetRestaurantTags(restaurantId);
 
-            foreach (var tag in existingTags)
+            foreach (var tag in existingTags.Result)
             {
                 _restaurantRepository.RemoveCuisineTag(tag);
             }
@@ -77,7 +76,7 @@ namespace BmaTestApi.Services
                 });
             }
             
-            _restaurantRepository.Update(existingItem);
+            _restaurantRepository.Update(existingItem.Result);
 
             if (!_restaurantRepository.Save())
             {
@@ -91,12 +90,12 @@ namespace BmaTestApi.Services
             
             var existingTags = _restaurantRepository.GetRestaurantTags(restaurantId);
 
-            foreach (var tag in existingTags)
+            foreach (var tag in existingTags.Result)
             {
                 _restaurantRepository.RemoveCuisineTag(tag);
             }
 
-            _restaurantRepository.Delete(existingItem);
+            _restaurantRepository.Delete(existingItem.Result);
 
             if (!_restaurantRepository.Save())
             {

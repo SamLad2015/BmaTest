@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Dynamic.Core;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace BmaTestApi.Repositories
 {
@@ -17,9 +19,9 @@ namespace BmaTestApi.Repositories
             _TestDbContext = TestDbContext;
         }
 
-        public IEnumerable<CuisineEntity> GetAll()
+        public async Task<IList<CuisineEntity>> GetAll()
         {
-            return _TestDbContext.CuisineEntities.OrderBy(c => c.Name);
+            return await _TestDbContext.CuisineEntities.OrderBy(c => c.Name).ToListAsync();
         }
     }
 }

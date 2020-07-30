@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using BmaTestApi.Entities;
 using BmaTestApi.Repositories;
 
@@ -12,10 +13,9 @@ namespace BmaTestApi.Services
         {
             _cuisineRepository = cuisineRepository;
         }
-        public IList<CuisineEntity> GetAllCuisineTags()
+        public async Task<IList<CuisineEntity>> GetAllCuisineTags()
         {
-            List<CuisineEntity> testEntities = _cuisineRepository.GetAll().ToList();
-            return testEntities;
+            return await _cuisineRepository.GetAll();
         }
     }
 }

@@ -20,6 +20,10 @@ export class RestaurantsListComponent implements AfterViewInit {
   data: any[];
   settings = {
     hideSubHeader: true,
+    pager:{
+      display:true,
+      perPage:5
+    },
     edit: {
       editButtonContent: '<span><i class="fa fa-edit" title="Edit"></i></span>'
     },
@@ -45,7 +49,7 @@ export class RestaurantsListComponent implements AfterViewInit {
   getAllRestaurants = () => {
     this.restaurantService.GetAllRestaurants()
       .subscribe((data) => {
-        this.ngRedux.dispatch(LoadRestaurants(data));
+        this.ngRedux.dispatch(LoadRestaurants(data.result));
       });
   }
 

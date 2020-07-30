@@ -22,7 +22,7 @@ export class CuisineService {
   }
 
   // GET
-  GetAllCuisines(): Observable<Cuisine[]> {
+  GetAllCuisines(): Observable<any> {
     return this.http.get<Cuisine[]>(this.baseurl , this.httpOptions)
       .pipe(
         retry(1),
