@@ -1,0 +1,32 @@
+.filters {
+  position: fixed;
+  top: 0;
+  right: 0;
+  background-color: #fff;
+}
+
+.filters .filter {
+  display: inline-block;
+  width: 33%;
+}
+
+.filters .filter label {
+  margin-right: 10px;
+}
+
+.filter-button {
+  float: right;
+}
+
+.filter-button button {
+  margin-right: 10px;
+  margin-bottom: 20px;
+}
+
+.radio-group {
+  padding: 7px 0;
+}
+
+.fa {
+  font-size: 0.8em;
+}

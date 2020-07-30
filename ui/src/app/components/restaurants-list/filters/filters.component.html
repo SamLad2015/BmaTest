@@ -1,0 +1,57 @@
+<div class="filters" [@changeDivSize]="isOpen ? 'final' : 'initial'" (@changeDivSize.done)="loadTags($event)">
+  <div class="content-row" *ngIf="!showFilters">
+    <div class="filter-button">
+      <button class="btn-info" (click)="isOpen=true">
+        <i class="fa fa-filter"></i> Apply filters
+      </button>
+    </div>
+  </div>
+  <div *ngIf="showFilters">
+  <div class="content-row">
+  <div class="filter">
+    <label for="name">Name</label>
+    <input id ="name" [(ngModel)]="filters.name" type="text" />
+  </div>
+  <div class="filter">
+    <div id="cuisine-container" class="cuisine-container">
+          <span class="cuisine-tag" [class.selected]="isTagSelected(c)"
+                *ngFor="let c of cuisines" (click)="addRemoveCuisineTag(c)">{{c.name}}</span>
+    </div>
+  </div>
+  <div class="filter">
+    <div class="radio-group">
+      <label for="familyFriendly">Family Friendly</label>
+      <div id="familyFriendly">
+          <input type="radio" value="true" name="familyFriendly" [(ngModel)]="filters.familyFriendly"> True
+          <input type="radio" value="false" name="familyFriendly" [(ngModel)]="filters.familyFriendly"> False
+          <input type="radio" value="both" name="familyFriendly" [(ngModel)]="filters.familyFriendly"> Both
+      </div>
+    </div>
+    <div class="radio-group">
+      <label for="veganOptions">Vegan Options</label>
+      <div id="veganOptions">
+        <input type="radio" value="true" name="veganOptions" [(ngModel)]="filters.veganOptions"> True
+        <input type="radio" value="false" name="veganOptions" [(ngModel)]="filters.veganOptions"> False
+        <input type="radio" value="both" name="veganOptions" [(ngModel)]="filters.veganOptions"> Both
+      </div>
+    </div>
+  </div>
+  </div>
+  <div class="content-row">
+    <div class="filter-button">
+      <button class="btn-primary" (click)="applyFilters()">
+        <i class="fa fa-check"></i>
+        Apply
+      </button>
+      <button class="btn-primary" (click)="resetFilters()">
+        <i class="fa fa-repeat"></i>
+        Reset
+      </button>
+      <button class="btn-danger" (click)="cancelModal()">
+        <i class="fa fa-remove"></i>
+        Cancel
+      </button>
+    </div>
+  </div>
+  </div>
+</div>
