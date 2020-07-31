@@ -34,6 +34,7 @@ export class FiltersComponent {
   cuisines: Cuisine[];
   isOpen: boolean;
   showFilters: boolean;
+  isFilterOn: boolean;
   constructor(private cuisineService: CuisineService,
               private restaurantService: RestaurantService,
               private ngRedux: NgRedux<IAppState>) {
@@ -58,6 +59,7 @@ export class FiltersComponent {
       .GetAllRestaurants(this.formatRequest(this.filters))
       .subscribe((data) => {
         this.ngRedux.dispatch(LoadRestaurants(data.result));
+        this.checkIfFilterOn();
         this.isOpen = false;
         this.showFilters =  false;
       });
@@ -65,6 +67,7 @@ export class FiltersComponent {
 
   cancelModal() {
     this.filters = new Filters();
+    this.checkIfFilterOn();
     this.isOpen = false;
     this.showFilters =  false;
   }
@@ -93,6 +96,14 @@ export class FiltersComponent {
       .GetAllRestaurants()
       .subscribe((data) => {
         this.ngRedux.dispatch(LoadRestaurants(data.result));
+        this.checkIfFilterOn();
       });
+  }
+
+  checkIfFilterOn() {
+    this.isFilterOn = this.filters.name != '' ||
+      (this.filters.familyFriendly && this.filters.familyFriendly.toString() != 'both') ||
+      (this.filters.veganOptions && this.filters.veganOptions.toString() != 'both') ||
+      (this.filters.cuisineTagIds && this.filters.cuisineTagIds.length > 0);
   }
 }

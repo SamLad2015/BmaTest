@@ -1,8 +1,11 @@
 <div class="filters" [@changeDivSize]="isOpen ? 'final' : 'initial'" (@changeDivSize.done)="loadTags($event)">
   <div class="content-row" *ngIf="!showFilters">
     <div class="filter-button">
-      <button class="btn-info" (click)="isOpen=true">
+      <button *ngIf="!isFilterOn" class="btn-info" (click)="isOpen=true">
         <i class="fa fa-filter"></i> Apply filters
+      </button>
+      <button *ngIf="isFilterOn" class="btn-danger" (click)="isOpen=true">
+        <i class="fa fa-filter"></i> Filter On
       </button>
     </div>
   </div>
