@@ -46,6 +46,36 @@
   <ItemGroup>
     <Content Remove="package.json" />
     <Content Remove="package-lock.json" />
+    <Content Remove="BmaTestApi.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="BmaTestApi.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Remove="BmaTestApi.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="BmaTestApi.Tests\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\obj\BmaTestApi.Tests.csproj.nuget.dgspec.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\obj\project.assets.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\obj\project.packagespec.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\bin\Debug\netcoreapp3.1\appsettings.Development.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\bin\Debug\netcoreapp3.1\appsettings.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\bin\Debug\netcoreapp3.1\BmaTestApi.Tests.deps.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\bin\Debug\netcoreapp3.1\BmaTestApi.Tests.runtimeconfig.dev.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\bin\Debug\netcoreapp3.1\BmaTestApi.Tests.runtimeconfig.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\bin\Debug\netcoreapp3.1\Properties\launchSettings.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\bin\Debug\netcoreapp3.1\ui\angular.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\bin\Debug\netcoreapp3.1\ui\package.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\bin\Debug\netcoreapp3.1\ui\tsconfig.app.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\bin\Debug\netcoreapp3.1\ui\tsconfig.json" />
+    <_ContentIncludedByDefault Remove="BmaTestApi.Tests\bin\Debug\netcoreapp3.1\ui\tslint.json" />
   </ItemGroup>
 
 </Project>
