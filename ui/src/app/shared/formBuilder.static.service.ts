@@ -15,7 +15,7 @@ export class FormBuilderStaticService {
       cuisine: [restaurant && restaurant.cuisine ? restaurant.cuisine : [], Validators.required],
       familyFriendly: [restaurant && restaurant.familyFriendly ? restaurant.familyFriendly : false, Validators.required],
       veganOptions: [restaurant && restaurant.veganOptions ? restaurant.veganOptions : false, Validators.required],
-      rating: [restaurant && restaurant.rating ? restaurant.rating : '', Validators.required]
+      rating: [restaurant && restaurant.rating ? restaurant.rating : 0, Validators.required]
     });
   }
 }
