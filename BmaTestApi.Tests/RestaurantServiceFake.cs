@@ -71,19 +71,44 @@ namespace BmaTestApi.Tests
             return _restaurants;
         }
 
-        public void AddRestaurant(RestaurantRequestDto requestDto)
+        public async void AddRestaurant(RestaurantRequestDto requestDto)
         {
-            throw new System.NotImplementedException();
+            await Task.Delay(200);
+            var request = new RestaurantDto
+            {
+                Id = 4,
+                Name = requestDto.Name,
+                Address = requestDto.Address,
+                FamilyFriendly = requestDto.FamilyFriendly,
+                VeganOptions = requestDto.VeganOptions,
+                Rating = requestDto.Rating,
+                CuisineTagIds = requestDto.CuisineTagIds,
+                Cuisine = new List<string> {"test 1", "test 3"}
+            };
+            _restaurants.Add(request);
         }
 
-        public void UpdateRestaurant(int id, RestaurantRequestDto requestDto)
+        public async void UpdateRestaurant(int id, RestaurantRequestDto requestDto)
         {
-            throw new System.NotImplementedException();
+            var request = new RestaurantDto
+            {
+                Id = id,
+                Name = requestDto.Name,
+                Address = requestDto.Address,
+                FamilyFriendly = requestDto.FamilyFriendly,
+                VeganOptions = requestDto.VeganOptions,
+                Rating = requestDto.Rating,
+                CuisineTagIds = requestDto.CuisineTagIds,
+                Cuisine = new List<string> {"test 1", "test 3"}
+            };
+            _restaurants.Remove(_restaurants.FirstOrDefault(r => r.Id == id));
+            _restaurants.Add(request);
         }
 
-        public void DeleteRestaurant(int restaurantId)
+        public async void DeleteRestaurant(int id)
         {
-            throw new System.NotImplementedException();
+            await Task.Delay(500);
+            _restaurants.Remove(_restaurants.FirstOrDefault(r => r.Id == id));
         }
         
         private static IEnumerable<int> StringToIntList(string str) {

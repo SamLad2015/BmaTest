@@ -62,5 +62,60 @@ namespace BmaTestApi.Tests
             Assert.Equal(2, result.Result.Count());
             Assert.Equal("test 1", result.Result.FirstOrDefault().Name);
         }
+        
+        [Fact]
+        public async Task AddRestaurant_WhenPosted_WithRestaurant_ReturnOkStatus()
+        {
+            _service.AddRestaurant(new RestaurantRequestDto()
+            {
+                Name = "test 4",
+                Address = "test address for 4",
+                FamilyFriendly = true,
+                VeganOptions = false,
+                Rating = 5,
+                CuisineTagIds = new List<int> {1, 3}
+            });
+            var result = _service.GetAll(new RestaurantFilterDto
+            {
+                Name = ""
+            });
+            Assert.Equal("test 4", result.Result.FirstOrDefault(r => r.Name=="test 4").Name);
+        }
+        
+        [Fact]
+        public async Task UpdateRestaurant_WhenPosted_WithRestaurant_ReturnOkStatus()
+        {
+            _service.UpdateRestaurant(3, new RestaurantRequestDto()
+            {
+                Name = "test  changed",
+                Address = "new address for 3",
+                FamilyFriendly = true,
+                VeganOptions = false,
+                Rating = 4,
+                CuisineTagIds = new List<int> {4, 3}
+            });
+            var result = _service.GetAll(new RestaurantFilterDto
+            {
+                Name = "changed"
+            });
+            Assert.Equal("test  changed", result.Result.FirstOrDefault().Name);
+        }
+        
+        [Fact]
+        public async Task DeleteRestaurant_WhenDeleted_WithRestaurantId_ReturnOkStatus()
+        {
+            var prevResult = _service.GetAll(new RestaurantFilterDto
+            {
+                Name = ""
+            });
+            Assert.Equal(3, prevResult.Result.Count());
+            
+            _service.DeleteRestaurant(1);
+            var result = _service.GetAll(new RestaurantFilterDto
+            {
+                Name = ""
+            });
+            Assert.Equal(3, result.Result.Count());
+        }
     }
 }
